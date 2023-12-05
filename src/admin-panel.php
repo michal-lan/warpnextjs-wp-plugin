@@ -3,7 +3,6 @@
  * Admin Panel
  * 
  * Description: adjust admin panel for using next.js app
- * TODO: add options page with settings of plugin (front-end site url, menu locations, graphql max query amount)
  */
 
 // disable comments system
