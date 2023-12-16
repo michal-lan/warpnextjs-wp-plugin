@@ -70,8 +70,8 @@ add_filter( 'preview_post_link', function ( $preview_link, $post ) {
     }
 
     // add params to link and change link to preview page on nextjs app
-    $preview_link = add_query_arg( array($args), untrailingslashit( WP_HOME ) . '/preview/' );
-    $preview_link = str_replace( untrailingslashit( WP_HOME ), untrailingslashit( NEXTJS_APP_URL ), $preview_link);
+    $preview_link = add_query_arg( array($args), untrailingslashit( WP_HOMEPAGE ) . '/preview/' );
+    $preview_link = str_replace( untrailingslashit( WP_HOMEPAGE ), untrailingslashit( NEXTJS_APP_URL ), $preview_link);
 
     return $preview_link;
 }, 10, 2 );
@@ -80,7 +80,7 @@ add_filter( 'preview_post_link', function ( $preview_link, $post ) {
 add_filter(
     'post_link',
     function ( $permalink, $post, $leavename ) {
-        return str_replace( untrailingslashit( WP_HOME ), untrailingslashit( NEXTJS_APP_URL ), $permalink );
+        return str_replace( untrailingslashit( WP_HOMEPAGE ), untrailingslashit( NEXTJS_APP_URL ), $permalink );
     },
     10,
     3
@@ -90,7 +90,7 @@ add_filter(
 add_filter(
     'page_link',
     function ( $permalink, $post, $leavename ) {
-        return str_replace( untrailingslashit( WP_HOME ), untrailingslashit( NEXTJS_APP_URL ), $permalink );
+        return str_replace( untrailingslashit( WP_HOMEPAGE ), untrailingslashit( NEXTJS_APP_URL ), $permalink );
     },
     10,
     3
@@ -100,7 +100,7 @@ add_filter(
 add_filter(
     'post_type_link',
     function ( $permalink, $post, $leavename ) {
-        return str_replace( untrailingslashit( WP_HOME ), untrailingslashit( NEXTJS_APP_URL ), $permalink );
+        return str_replace( untrailingslashit( WP_HOMEPAGE ), untrailingslashit( NEXTJS_APP_URL ), $permalink );
     },
     10,
     3
@@ -110,7 +110,7 @@ add_filter(
 add_filter(
     'category_link',
     function ( $termlink, $term_id ) {
-        return str_replace( untrailingslashit( WP_HOME ), untrailingslashit( NEXTJS_APP_URL ), $termlink );
+        return str_replace( untrailingslashit( WP_HOMEPAGE ), untrailingslashit( NEXTJS_APP_URL ), $termlink );
     },
     10,
     2
@@ -120,7 +120,7 @@ add_filter(
 add_filter(
     'tag_link',
     function ( $termlink, $term_id ) {
-        return str_replace( untrailingslashit( WP_HOME ), untrailingslashit( NEXTJS_APP_URL ), $termlink );
+        return str_replace( untrailingslashit( WP_HOMEPAGE ), untrailingslashit( NEXTJS_APP_URL ), $termlink );
     },
     10,
     2

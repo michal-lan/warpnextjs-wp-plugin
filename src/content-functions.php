@@ -34,7 +34,7 @@ add_filter( 'graphql_connection_max_query_amount', function ( int $max_amount, $
 // add JWT secret key for graphql
 add_filter( 'graphql_jwt_auth_secret_key', function() {
     return GRAPHQL_SECRET_KEY;
-  });
+});
 
 // set expiration of JWT
 function warpnextjs_jwt_expiration( $expiration ) {
