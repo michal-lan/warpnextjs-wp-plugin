@@ -16,11 +16,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// CONFIGURATION - should be in options page
-define( 'NEXTJS_APP_URL', 'http://localhost:3000' );
 // It's recommended that you use something like the WordPress Salt generator (https://api.wordpress.org/secret-key/1.1/salt/) to generate a Secret.
 define( 'GRAPHQL_SECRET_KEY', 'Fc@<WLh|kevB{p({Ti?ta|LNu?O`y-9jzdiKaR%L-f)set=?SnU3psI;UO+BvS40' );
-define( 'MENU_LOCATIONS', 'primary, footer');
 define( 'WPGRAPHQL_MAX_QUERY_AMOUNT', 1000);
 
 define( 'WP_HOMEPAGE', get_home_url() );
@@ -30,3 +27,4 @@ define( 'WARPNEXTJS_WP_PLUGIN_DIR', untrailingslashit( dirname( WARPNEXTJS_WP_PL
 
 require_once WARPNEXTJS_WP_PLUGIN_DIR . '/src/content-functions.php';
 require_once WARPNEXTJS_WP_PLUGIN_DIR . '/src/admin-panel.php';
+require_once WARPNEXTJS_WP_PLUGIN_DIR . '/src/options-page.php';

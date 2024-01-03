@@ -12,9 +12,38 @@ function warpnextjs_add_theme_support() {
 }
 add_action( 'after_setup_theme', 'warpnextjs_add_theme_support' );
 
+// get option page setting
+function WarpNextSetting( $name, $default = false ) {
+    $response = $default;
+    $settings = get_option( 'warpnextjs_settings', array() );
+    
+    if ( isset( $settings[ $name ] ) ) {
+		$response = $settings[ $name ];
+	}
+
+    return $response;
+}
+
+// get all settings from option page
+function WarpNextSettings() {
+	$settings = get_option( 'warpnextjs_settings', array() );
+	return apply_filters( 'WarpNextSettings', $settings );
+}
+
+// update setting on option page
+function WarpNextUpdateSetting( $name, $value ) {
+	$settings          = WarpNextSettings();
+	$settings[ $name ] = $value;
+
+	update_option( 'warpnextjs_settings', $settings );
+}
+
+// set app url based on setting from option page - it will change links in previews
+define( 'NEXTJS_APP_URL', WarpNextSetting( 'frontend_url', 'http://localhost:3000' ) );
+
 // add Menu locations
 function warpnextjs_register_menu_locations() {
-    $menu_locations = MENU_LOCATIONS;
+    $menu_locations = WarpNextSetting( 'menu_locations', 'Primary, Footer' );
     $menu_locations = preg_replace('/\s+/', '', $menu_locations);
     $menu_locations = explode(',', $menu_locations);
 
@@ -68,3 +97,40 @@ add_action("graphql_register_types", function () {
         ]);
     }
 });
+
+// Restore the original user.
+add_action( 'graphql_process_http_request_response', 'WarpNextResetCurrentUserPreview' );
+function WarpNextResetCurrentUserPreview() {
+    $original_user_id = get_current_user_id();
+    wp_set_current_user( $original_user_id );
+}
+
+// Get first admin user ID
+function get_first_admin_user_id() {
+    $query = new WP_User_Query( 
+        array(
+            'role' => 'Administrator',
+            'count_total' => false,
+            'number' => 1,
+            'fields' => 'ID'
+        )
+    );
+
+    $role_results = $query->get_results();
+    if ( !empty( $role_results ) && is_array( $role_results ) ) {
+        return $role_results[0];
+    }
+
+    return null;
+}
+
+// if keys are equal (WP & Next.js) while graphql request - allow to return preview data
+add_action( 'init_graphql_request', 'WarpNextCurrentUserPreview' );
+function WarpNextCurrentUserPreview() {
+    $headerSecretKey = isset($_SERVER['HTTP_X_WARPNEXTJS_SECRET']) ? $_SERVER['HTTP_X_WARPNEXTJS_SECRET'] : null;
+    $settingsSecretKey = WarpNextSetting('secret_key' , '');
+
+    if ($headerSecretKey === $settingsSecretKey) {
+        wp_set_current_user( get_first_admin_user_id() );
+    }
+}

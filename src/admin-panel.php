@@ -80,6 +80,8 @@ add_filter( 'preview_post_link', function ( $preview_link, $post ) {
 add_filter(
     'post_link',
     function ( $permalink, $post, $leavename ) {
+        if ( function_exists( 'is_graphql_request' ) && is_graphql_request() ) return $permalink;
+
         return str_replace( untrailingslashit( WP_HOMEPAGE ), untrailingslashit( NEXTJS_APP_URL ), $permalink );
     },
     10,
@@ -90,6 +92,8 @@ add_filter(
 add_filter(
     'page_link',
     function ( $permalink, $post, $leavename ) {
+        if ( function_exists( 'is_graphql_request' ) && is_graphql_request() ) return $permalink;
+
         return str_replace( untrailingslashit( WP_HOMEPAGE ), untrailingslashit( NEXTJS_APP_URL ), $permalink );
     },
     10,
@@ -100,6 +104,8 @@ add_filter(
 add_filter(
     'post_type_link',
     function ( $permalink, $post, $leavename ) {
+        if ( function_exists( 'is_graphql_request' ) && is_graphql_request() ) return $permalink;
+
         return str_replace( untrailingslashit( WP_HOMEPAGE ), untrailingslashit( NEXTJS_APP_URL ), $permalink );
     },
     10,
@@ -110,6 +116,8 @@ add_filter(
 add_filter(
     'category_link',
     function ( $termlink, $term_id ) {
+        if ( function_exists( 'is_graphql_request' ) && is_graphql_request() ) return $termlink;
+
         return str_replace( untrailingslashit( WP_HOMEPAGE ), untrailingslashit( NEXTJS_APP_URL ), $termlink );
     },
     10,
@@ -120,6 +128,8 @@ add_filter(
 add_filter(
     'tag_link',
     function ( $termlink, $term_id ) {
+        if ( function_exists( 'is_graphql_request' ) && is_graphql_request() ) return $termlink;
+
         return str_replace( untrailingslashit( WP_HOMEPAGE ), untrailingslashit( NEXTJS_APP_URL ), $termlink );
     },
     10,

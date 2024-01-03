@@ -5,7 +5,9 @@ It's a WordPress plugin that allows easy integration with WarpNext.js and provid
 ## 🚀 Quick start
 
 1. Download, install and activate the plugin in your WordPress
-2. Change the available configuration in the "warpnextjs-wp-plugin.php" file
+2. Change the available configuration in the WordPress Admin Panel → Settings → WarpNext.js
+3. Add `Secret Key` to the `WARPNEXTJS_SECRET_KEY` in the .env file of Next.js App
+4. Set GRAPHQL_SECRET_KEY in the "warpnextjs-wp-plugin.php" file (optional)
 
 ## Requirements
 
@@ -14,4 +16,4 @@ It's a WordPress plugin that allows easy integration with WarpNext.js and provid
 
 ## TODO
 
--   add options page with settings of plugin (front-end site url, menu locations, graphql max query amount)
+-   any ideas?
